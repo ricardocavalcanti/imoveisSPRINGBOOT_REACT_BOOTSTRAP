@@ -1,4 +1,4 @@
-package com.rcavalcanti.meusimoveis.service.implementacao;
+package com.rcavalcanti.meusimoveis.service.implement;
 
 import java.util.Optional;
 
@@ -12,11 +12,11 @@ import com.rcavalcanti.meusimoveis.model.repository.UsuarioRepository;
 import com.rcavalcanti.meusimoveis.service.UsuarioService;
 
 @Service
-public class UsuarioServiceImplementa implements UsuarioService {	
+public class UsuarioServiceImplements implements UsuarioService {	
 	
 	private UsuarioRepository repository;	
 	
-	public UsuarioServiceImplementa(UsuarioRepository repository) {
+	public UsuarioServiceImplements(UsuarioRepository repository) {
 		super();
 		this.repository = repository;
 	}

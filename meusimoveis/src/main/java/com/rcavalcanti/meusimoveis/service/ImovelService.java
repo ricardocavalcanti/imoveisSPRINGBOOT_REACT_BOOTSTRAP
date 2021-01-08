@@ -1,0 +1,19 @@
+package com.rcavalcanti.meusimoveis.service;
+
+import java.util.List;
+
+import com.rcavalcanti.meusimoveis.model.entity.Imovel;
+import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
+
+public interface ImovelService {
+
+	Imovel salvar(Imovel imovel);
+
+	Imovel atualizar(Imovel imovel);
+
+	void deletar(Imovel imovel);
+
+	List<Imovel> buscar(Imovel imovelFiltro);
+
+	void atualizarStatus(Imovel imovelFiltro, StatusImovel statusImovel);
+}
