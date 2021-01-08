@@ -1,5 +1,7 @@
 package com.rcavalcanti.meusimoveis.service;
 
+import java.util.Optional;
+
 import com.rcavalcanti.meusimoveis.model.entity.Usuario;
 
 public interface UsuarioService {
@@ -9,4 +11,6 @@ public interface UsuarioService {
 	Usuario salvarUsuario(Usuario usuario);
 
 	void validarEmail(String email);
+	
+	Optional<Usuario> consultarPorId(Long id_usuario);
 }

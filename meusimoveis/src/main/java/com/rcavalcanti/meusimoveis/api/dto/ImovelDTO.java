@@ -2,15 +2,13 @@ package com.rcavalcanti.meusimoveis.api.dto;
 
 import java.math.BigDecimal;
 
-import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
-
 public class ImovelDTO {
 
 	private Long id_imovel;
 
 	private Long id_usuario;
 
-	private StatusImovel statusImovel;
+	private String statusImovel;
 
 	private String descricao;
 
@@ -55,11 +53,11 @@ public class ImovelDTO {
 		this.id_usuario = id_usuario;
 	}
 
-	public StatusImovel getStatusImovel() {
+	public String getStatusImovel() {
 		return statusImovel;
 	}
 
-	public void setStatusImovel(StatusImovel statusImovel) {
+	public void setStatusImovel(String statusImovel) {
 		this.statusImovel = statusImovel;
 	}
 
