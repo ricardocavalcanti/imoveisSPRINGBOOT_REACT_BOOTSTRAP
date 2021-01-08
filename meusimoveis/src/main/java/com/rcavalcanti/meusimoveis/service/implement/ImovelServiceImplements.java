@@ -3,6 +3,7 @@ package com.rcavalcanti.meusimoveis.service.implement;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rcavalcanti.meusimoveis.model.entity.Imovel;
 import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
@@ -19,8 +20,9 @@ public class ImovelServiceImplements implements ImovelService {
 	}
 
 	@Override
-	public Imovel salvar(Imovel imovel) {	
-		return null;
+	@Transactional
+	public Imovel salvar(Imovel imovel) {		
+		return repository.save(imovel);
 	}
 
 	@Override
