@@ -1,4 +1,4 @@
-package com.rcavalcanti.meusimoveis.model.entity;
+package com.rcavalcanti.meusimoveis.model.enums;
 
 public enum StatusImovel {
 	

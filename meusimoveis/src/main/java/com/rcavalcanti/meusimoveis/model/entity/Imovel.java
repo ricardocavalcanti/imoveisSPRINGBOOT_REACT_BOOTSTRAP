@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.convert.Jsr310Converters;
 
+import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
+
 @Entity
 @Table(name = "tb_imovel", schema = "imoveis")
 public class Imovel {
