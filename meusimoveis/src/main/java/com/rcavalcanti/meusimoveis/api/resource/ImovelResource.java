@@ -2,6 +2,7 @@ package com.rcavalcanti.meusimoveis.api.resource;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -55,6 +56,15 @@ public class ImovelResource {
 					return ResponseEntity.badRequest().body(e.getMessage());
 				}
 			
+		}).orElseGet(() -> new ResponseEntity("Imóvel não encontrado na base de dados!", HttpStatus.BAD_REQUEST));
+	}
+	
+	@DeleteMapping("{id}")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ResponseEntity deletar(@PathVariable("id") Long id_imovel) {
+		return imovelService.consultarPorId(id_imovel).map( entity -> {
+			imovelService.deletar(entity);
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}).orElseGet(() -> new ResponseEntity("Imóvel não encontrado na base de dados!", HttpStatus.BAD_REQUEST));
 	}
 	
