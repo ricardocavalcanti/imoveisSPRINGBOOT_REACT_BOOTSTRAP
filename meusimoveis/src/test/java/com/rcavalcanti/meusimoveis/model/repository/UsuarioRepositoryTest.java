@@ -20,26 +20,55 @@ public class UsuarioRepositoryTest {
 	@Autowired
 	UsuarioRepository repository;
 	
-	@Test
-	public void deveVerificarExistenciaDeEmail() {		
-		//Cenario		 
+//	@Test
+//	public void deveVerificarExistenciaDeEmail() {		
+//		//Cenario		 
+//		ccccc		
+//		//Acao e execucao
+//		boolean result = repository.existsByEmail("usuario@email.com");		
+//		//Verificacao
+//		Assertions.assertThat(result).isTrue();		
+//	}
+//	
+//	@Test
+//	public void deveRetornarFalsoQuandoNaoHouverUsuarioCadastradoComEmail() {		
+//		//Cenario	
+//		repository.deleteAll();		
+//		//Acao e execucao
+//		boolean result = repository.existsByEmail("usuario@email.com");		
+//		//Verificacao
+//		Assertions.assertThat(result).isFalse();		
+//	}
+	
+//	@Test
+//	public void devePersistirUsuarioNaBaseDados() {		
+//		//Cenario	
+//		Usuario usuario = criarUsuario();
+//		usuario.setNome("usuario");
+//		usuario.setEmail("usuario@email.com");
+//		usuario.setSenha("senha");				
+//		//Acao e execucao
+//		Usuario usuarioSalvo = repository.save(usuario);
+//		//Verificacao
+//		Assertions.assertThat(usuarioSalvo.getId_usuario()).isNotNull();		
+//	}
+	
+//	@Test
+//	public void deveBuscarUsuarioPorEmail() {		
+//		//Cenario	
+//		Usuario usuario = criarUsuario();					
+//		//Acao e execucao
+//		Usuario usuarioSalvo = repository.save(usuario);
+//		//Verificacao
+//		Assertions.assertThat(usuarioSalvo.getId_usuario()).isNotNull();		
+//	}
+	
+	public static Usuario criarUsuario() {
 		Usuario usuario = new Usuario();
 		usuario.setNome("usuario");
 		usuario.setEmail("usuario@email.com");
-		repository.save(usuario);		
-		//Acao e execucao
-		boolean result = repository.existsByEmail("usuario@email.com");		
-		//Verificacao
-		Assertions.assertThat(result).isTrue();		
-	}
-	
-	@Test
-	public void deveRetornarFalsoQuandoNaoHouverUsuarioCadastradoComEmail() {		
-		//Cenario	
-		repository.deleteAll();		
-		//Acao e execucao
-		boolean result = repository.existsByEmail("usuario@email.com");		
-		//Verificacao
-		Assertions.assertThat(result).isFalse();		
+		usuario.setSenha("senha");
+		return usuario;
+		
 	}
 }
