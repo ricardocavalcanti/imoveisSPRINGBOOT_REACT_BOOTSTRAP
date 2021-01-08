@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rcavalcanti.meusimoveis.api.dto.UsuarioDTO;
+import com.rcavalcanti.meusimoveis.exception.ErroAutenticacao;
 import com.rcavalcanti.meusimoveis.exception.RegraNegocioException;
 import com.rcavalcanti.meusimoveis.model.entity.Usuario;
 import com.rcavalcanti.meusimoveis.service.UsuarioService;
@@ -28,6 +29,18 @@ public class UsuarioResource {
 		this.service = service;
 	}
 	
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/autenticar")
+	public ResponseEntity autenticar(@RequestBody UsuarioDTO dto) {
+		try {
+			 Usuario usuarioAutenticado = service.autenticar(dto.getEmail(), dto.getSenha());	
+			 return ResponseEntity.ok(usuarioAutenticado);
+		} catch (ErroAutenticacao e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody  UsuarioDTO dto) {
 		Usuario usuario = new Usuario();
