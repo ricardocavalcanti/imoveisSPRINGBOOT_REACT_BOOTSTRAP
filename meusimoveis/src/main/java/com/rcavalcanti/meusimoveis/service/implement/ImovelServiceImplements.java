@@ -2,6 +2,7 @@ package com.rcavalcanti.meusimoveis.service.implement;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -75,6 +76,11 @@ public class ImovelServiceImplements implements ImovelService {
 		}else if(imovel.getUsuario()==null || imovel.getUsuario().getId_usuario()==null) {
 			throw new RegraNegocioException("Informe um Número válido!");
 		}			
+	}
+
+	@Override
+	public Optional<Imovel> consultarPorId(Long id_imovel) {		
+		return repository.findById(id_imovel);
 	}
 
 }

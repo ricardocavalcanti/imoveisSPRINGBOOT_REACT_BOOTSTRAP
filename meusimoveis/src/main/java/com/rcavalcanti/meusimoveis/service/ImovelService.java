@@ -1,6 +1,7 @@
 package com.rcavalcanti.meusimoveis.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.rcavalcanti.meusimoveis.model.entity.Imovel;
 import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
@@ -18,4 +19,6 @@ public interface ImovelService {
 	void atualizarStatus(Imovel imovelFiltro, StatusImovel statusImovel);
 	
 	void validar(Imovel imovelFiltro);
+	
+	Optional<Imovel> consultarPorId(Long id_imovel); 
 }

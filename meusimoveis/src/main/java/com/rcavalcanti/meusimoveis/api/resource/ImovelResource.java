@@ -1,9 +1,10 @@
 package com.rcavalcanti.meusimoveis.api.resource;
 
-import java.util.Optional;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,10 +30,33 @@ public class ImovelResource {
 		this.imovelService = imovelService;		
 	}
 	
-//	@PostMapping
-//	public ResponseEntity salvar(@RequestBody ImovelDTo dto) {
-//		
-//	}
+	@PostMapping
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ResponseEntity salvar(@RequestBody ImovelDTO dto) {
+		try {
+			Imovel imovel = converter(dto);
+			imovel = imovelService.salvar(imovel);
+			return new ResponseEntity(imovel, HttpStatus.CREATED);			
+		}catch (RegraNegocioException e){
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}		
+	}
+	
+	@PutMapping("{id}")	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ResponseEntity atualizar(@PathVariable("id") Long id_imovel, @RequestBody ImovelDTO dto) {
+			return imovelService.consultarPorId(id_imovel).map(entity -> {
+				try {
+					Imovel imovel = converter(dto);
+					imovel.setId_imovel(entity.getId_imovel());
+					imovelService.atualizar(imovel);
+					return ResponseEntity.ok(imovel);
+				}catch (RegraNegocioException e) {
+					return ResponseEntity.badRequest().body(e.getMessage());
+				}
+			
+		}).orElseGet(() -> new ResponseEntity("Imóvel não encontrado na base de dados!", HttpStatus.BAD_REQUEST));
+	}
 	
 	private Imovel converter(ImovelDTO dto) {
 		Imovel imovel = new Imovel();
