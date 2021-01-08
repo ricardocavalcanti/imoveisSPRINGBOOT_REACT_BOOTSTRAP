@@ -2,11 +2,21 @@ package com.rcavalcanti.meusimoveis.service.implement;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.rcavalcanti.meusimoveis.model.entity.Imovel;
 import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
+import com.rcavalcanti.meusimoveis.model.repository.ImovelRepository;
 import com.rcavalcanti.meusimoveis.service.ImovelService;
 
-public class ImovelServiceImplements implements ImovelService {
+@Service
+public class ImovelServiceImplements implements ImovelService {	
+	
+	private ImovelRepository repository;
+	
+	public ImovelServiceImplements(ImovelRepository repository) {
+		this.repository = repository;		
+	}
 
 	@Override
 	public Imovel salvar(Imovel imovel) {	
@@ -24,14 +34,12 @@ public class ImovelServiceImplements implements ImovelService {
 	}
 
 	@Override
-	public List<Imovel> buscar(Imovel imovelFiltro) {
-		// TODO Auto-generated method stub
+	public List<Imovel> buscar(Imovel imovelFiltro) {		
 		return null;
 	}
 
 	@Override
-	public void atualizarStatus(Imovel imovelFiltro, StatusImovel statusImovel) {
-		// TODO Auto-generated method stub
+	public void atualizarStatus(Imovel imovelFiltro, StatusImovel statusImovel) {		
 		
 	}
 
