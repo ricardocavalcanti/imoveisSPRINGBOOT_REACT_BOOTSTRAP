@@ -1,10 +1,8 @@
 package com.rcavalcanti.meusimoveis.model.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.springframework.data.convert.Jsr310Converters;
 
 import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
 
@@ -75,9 +71,6 @@ public class Imovel {
 	@Column(name = "estado")
 	private String estado;
 	
-	@Column(name = "data_cadastro")
-	@Convert(converter = Jsr310Converters.DateToLocalDateConverter.class)
-	private LocalDate dataCadastro;
 
 	public Long getId_imovel() {
 		return id_imovel;
@@ -206,14 +199,7 @@ public class Imovel {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -223,7 +209,6 @@ public class Imovel {
 		result = prime * result + area;
 		result = prime * result + cep;
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((id_imovel == null) ? 0 : id_imovel.hashCode());
@@ -238,6 +223,7 @@ public class Imovel {
 		result = prime * result + ((valor_venda == null) ? 0 : valor_venda.hashCode());
 		return result;
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -258,11 +244,6 @@ public class Imovel {
 			if (other.cidade != null)
 				return false;
 		} else if (!cidade.equals(other.cidade))
-			return false;
-		if (dataCadastro == null) {
-			if (other.dataCadastro != null)
-				return false;
-		} else if (!dataCadastro.equals(other.dataCadastro))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
@@ -314,6 +295,7 @@ public class Imovel {
 			return false;
 		return true;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -321,8 +303,7 @@ public class Imovel {
 				+ ", descricao=" + descricao + ", quantidade_quartos=" + quantidade_quartos + ", quantidade_banheiros="
 				+ quantidade_banheiros + ", valor_aluguel=" + valor_aluguel + ", valor_venda=" + valor_venda + ", ano="
 				+ ano + ", area=" + area + ", telefone=" + telefone + ", rua=" + rua + ", numero=" + numero + ", cep="
-				+ cep + ", cidade=" + cidade + ", estado=" + estado + ", dataCadastro=" + dataCadastro + "]";
+				+ cep + ", cidade=" + cidade + ", estado=" + estado + "]";
 	}	
-	
 
 }
