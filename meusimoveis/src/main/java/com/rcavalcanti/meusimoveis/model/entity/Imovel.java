@@ -36,10 +36,10 @@ public class Imovel {
 	private String descricao;
 	
 	@Column(name = "quantidade_quarto")
-	private int quantidade_quartos;
+	private Integer quantidade_quartos;
 	
 	@Column(name = "quantidade_banheiros")
-	private int quantidade_banheiros;
+	private Integer quantidade_banheiros;
 	
 	@Column(name = "valor_aluguel")
 	private BigDecimal valor_aluguel; 
@@ -48,10 +48,10 @@ public class Imovel {
 	private BigDecimal valor_venda; 
 	
 	@Column(name = "ano")
-	private int ano;
+	private Integer ano;
 	
 	@Column(name = "area")
-	private int area;
+	private Integer area;
 	
 	@Column(name = "telefone")
 	private String telefone;
@@ -60,10 +60,10 @@ public class Imovel {
 	private String rua;
 	
 	@Column(name = "numero")
-	private int numero;
+	private Integer numero;
 	
 	@Column(name = "cep")
-	private int cep;
+	private Integer cep;
 	
 	@Column(name = "cidade")
 	private String cidade;
@@ -104,19 +104,19 @@ public class Imovel {
 		this.descricao = descricao;
 	}
 
-	public int getQuantidade_quartos() {
+	public Integer getQuantidade_quartos() {
 		return quantidade_quartos;
 	}
 
-	public void setQuantidade_quartos(int quantidade_quartos) {
+	public void setQuantidade_quartos(Integer quantidade_quartos) {
 		this.quantidade_quartos = quantidade_quartos;
 	}
 
-	public int getQuantidade_banheiros() {
+	public Integer getQuantidade_banheiros() {
 		return quantidade_banheiros;
 	}
 
-	public void setQuantidade_banheiros(int quantidade_banheiros) {
+	public void setQuantidade_banheiros(Integer quantidade_banheiros) {
 		this.quantidade_banheiros = quantidade_banheiros;
 	}
 
@@ -136,19 +136,19 @@ public class Imovel {
 		this.valor_venda = valor_venda;
 	}
 
-	public int getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 
-	public int getArea() {
+	public Integer getArea() {
 		return area;
 	}
 
-	public void setArea(int area) {
+	public void setArea(Integer area) {
 		this.area = area;
 	}
 
@@ -168,19 +168,19 @@ public class Imovel {
 		this.rua = rua;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
-	public int getCep() {
+	public Integer getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(Integer cep) {
 		this.cep = cep;
 	}
 
@@ -199,22 +199,21 @@ public class Imovel {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ano;
-		result = prime * result + area;
-		result = prime * result + cep;
+		result = prime * result + ((ano == null) ? 0 : ano.hashCode());
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((id_imovel == null) ? 0 : id_imovel.hashCode());
-		result = prime * result + numero;
-		result = prime * result + quantidade_banheiros;
-		result = prime * result + quantidade_quartos;
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		result = prime * result + ((quantidade_banheiros == null) ? 0 : quantidade_banheiros.hashCode());
+		result = prime * result + ((quantidade_quartos == null) ? 0 : quantidade_quartos.hashCode());
 		result = prime * result + ((rua == null) ? 0 : rua.hashCode());
 		result = prime * result + ((statusImovel == null) ? 0 : statusImovel.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
@@ -223,7 +222,6 @@ public class Imovel {
 		result = prime * result + ((valor_venda == null) ? 0 : valor_venda.hashCode());
 		return result;
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -234,11 +232,20 @@ public class Imovel {
 		if (getClass() != obj.getClass())
 			return false;
 		Imovel other = (Imovel) obj;
-		if (ano != other.ano)
+		if (ano == null) {
+			if (other.ano != null)
+				return false;
+		} else if (!ano.equals(other.ano))
 			return false;
-		if (area != other.area)
+		if (area == null) {
+			if (other.area != null)
+				return false;
+		} else if (!area.equals(other.area))
 			return false;
-		if (cep != other.cep)
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
 			return false;
 		if (cidade == null) {
 			if (other.cidade != null)
@@ -260,11 +267,20 @@ public class Imovel {
 				return false;
 		} else if (!id_imovel.equals(other.id_imovel))
 			return false;
-		if (numero != other.numero)
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
 			return false;
-		if (quantidade_banheiros != other.quantidade_banheiros)
+		if (quantidade_banheiros == null) {
+			if (other.quantidade_banheiros != null)
+				return false;
+		} else if (!quantidade_banheiros.equals(other.quantidade_banheiros))
 			return false;
-		if (quantidade_quartos != other.quantidade_quartos)
+		if (quantidade_quartos == null) {
+			if (other.quantidade_quartos != null)
+				return false;
+		} else if (!quantidade_quartos.equals(other.quantidade_quartos))
 			return false;
 		if (rua == null) {
 			if (other.rua != null)
@@ -295,7 +311,6 @@ public class Imovel {
 			return false;
 		return true;
 	}
-	
 
 	@Override
 	public String toString() {

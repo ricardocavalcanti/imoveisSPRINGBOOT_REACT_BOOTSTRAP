@@ -9,6 +9,7 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rcavalcanti.meusimoveis.exception.RegraNegocioException;
 import com.rcavalcanti.meusimoveis.model.entity.Imovel;
 import com.rcavalcanti.meusimoveis.model.enums.StatusImovel;
 import com.rcavalcanti.meusimoveis.model.repository.ImovelRepository;
@@ -25,7 +26,8 @@ public class ImovelServiceImplements implements ImovelService {
 
 	@Override
 	@Transactional
-	public Imovel salvar(Imovel imovel) {		
+	public Imovel salvar(Imovel imovel) {	
+		validar(imovel);
 		return repository.save(imovel);
 	}
 
@@ -42,9 +44,10 @@ public class ImovelServiceImplements implements ImovelService {
 		Objects.requireNonNull(imovel.getId_imovel());
 		repository.delete(imovel);		
 	}
-
+	
 	@Override
 	@Transactional(readOnly = true)
+	@SuppressWarnings({ "rawtypes", "unused" })
 	public List<Imovel> buscar(Imovel imovelFiltro) {
 		Example example = Example.of(imovelFiltro, ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
 		return repository.findAll();
@@ -53,7 +56,25 @@ public class ImovelServiceImplements implements ImovelService {
 	@Override
 	public void atualizarStatus(Imovel imovel, StatusImovel statusImovel) {	
 		imovel.setStatusImovel(statusImovel);
+		validar(imovel);
 		atualizar(imovel);		
+	}
+
+	@Override
+	public void validar(Imovel imovel) {
+		if(imovel.getStatusImovel()==null) {
+			throw new RegraNegocioException("Informe um Status válido para o imóvel!");
+		}else if(imovel.getDescricao()==null || imovel.getDescricao().trim().equals("")) {
+			throw new RegraNegocioException("Informe uma Descrição válida!");			
+		}else if(imovel.getRua()==null || imovel.getRua().trim().equals("")) {
+			throw new RegraNegocioException("Informe uma Rua válida!");
+		}else if(imovel.getCep()==null) {
+			throw new RegraNegocioException("Informe uma CEP válido!");
+		}else if(imovel.getNumero()==null) {
+			throw new RegraNegocioException("Informe um Número válido!");
+		}else if(imovel.getUsuario()==null || imovel.getUsuario().getId_usuario()==null) {
+			throw new RegraNegocioException("Informe um Número válido!");
+		}			
 	}
 
 }

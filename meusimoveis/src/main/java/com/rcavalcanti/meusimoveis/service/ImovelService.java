@@ -16,4 +16,6 @@ public interface ImovelService {
 	List<Imovel> buscar(Imovel imovelFiltro);
 
 	void atualizarStatus(Imovel imovelFiltro, StatusImovel statusImovel);
+	
+	void validar(Imovel imovelFiltro);
 }
