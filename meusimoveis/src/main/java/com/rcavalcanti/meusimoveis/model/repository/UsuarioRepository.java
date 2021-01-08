@@ -1,9 +1,11 @@
 package com.rcavalcanti.meusimoveis.model.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rcavalcanti.meusimoveis.model.entity.Usuario;
-
+//Seria meu DAO
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	//Optional, usuario pode ou nao existir
@@ -12,5 +14,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	//select * from email where exists
 	boolean existsByEmail(String email);
+	
+	Optional<Usuario> findByEmail(String email);
 
 }

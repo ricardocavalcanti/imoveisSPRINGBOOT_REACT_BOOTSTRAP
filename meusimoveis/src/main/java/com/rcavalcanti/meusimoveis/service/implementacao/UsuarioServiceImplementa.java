@@ -1,8 +1,11 @@
 package com.rcavalcanti.meusimoveis.service.implementacao;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rcavalcanti.meusimoveis.exception.ErroAutenticacao;
 import com.rcavalcanti.meusimoveis.exception.RegraNegocioException;
 import com.rcavalcanti.meusimoveis.model.entity.Usuario;
 import com.rcavalcanti.meusimoveis.model.repository.UsuarioRepository;
@@ -19,8 +22,14 @@ public class UsuarioServiceImplementa implements UsuarioService {
 	}
 
 	@Override
-	public Usuario autenticar(String email, String senha) {		
-		return null;
+	public Usuario autenticar(String email, String senha) {
+		Optional<Usuario> usuario = repository.findByEmail(email);
+		if(!usuario.isPresent()) {
+			throw new ErroAutenticacao("Usuário não encontrado para o email informado!");
+		}else if (!usuario.get().getSenha().equals(senha)){
+			throw new ErroAutenticacao("Senha inválida!");			
+		}
+		return usuario.get();
 	}
 
 	@Override
