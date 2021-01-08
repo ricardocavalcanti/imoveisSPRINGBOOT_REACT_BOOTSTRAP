@@ -1,13 +1,18 @@
 package com.rcavalcanti.meusimoveis.api.resource;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rcavalcanti.meusimoveis.api.dto.ImovelDTO;
@@ -30,6 +35,28 @@ public class ImovelResource {
 	public ImovelResource(ImovelService imovelService) {
 		this.imovelService = imovelService;		
 	}
+	
+	@GetMapping
+	@SuppressWarnings("rawtypes")
+	public ResponseEntity buscar( @RequestParam(value="descricao", required = false) String descricao, 
+			@RequestParam(value="rua",required = false) String rua, @RequestParam(value="cep",required = false) Integer cep, 
+			@RequestParam("usuario") Long id_usuario) {
+		
+			Imovel imovelFiltro = new Imovel();
+			imovelFiltro.setDescricao(descricao);
+			imovelFiltro.setRua(rua);
+			imovelFiltro.setCep(cep);
+			
+			Optional<Usuario> usuario = usuarioService.consultarPorId(id_usuario);
+			if(usuario.isPresent()) {
+				return ResponseEntity.badRequest().body("Não foi possível realizar a conssulta, usuário não encontrado para o Id informado!");
+			}else {
+				imovelFiltro.setUsuario(usuario.get());
+			}
+			
+			List<Imovel> imoveis = imovelService.buscar(imovelFiltro);
+			return ResponseEntity.ok(imoveis);
+		}
 	
 	@PostMapping
 	@SuppressWarnings({ "rawtypes", "unchecked" })
