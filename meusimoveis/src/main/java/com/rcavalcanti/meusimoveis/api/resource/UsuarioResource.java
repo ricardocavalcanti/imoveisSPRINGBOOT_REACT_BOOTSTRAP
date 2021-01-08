@@ -14,6 +14,7 @@ import com.rcavalcanti.meusimoveis.exception.RegraNegocioException;
 import com.rcavalcanti.meusimoveis.model.entity.Usuario;
 import com.rcavalcanti.meusimoveis.service.UsuarioService;
 
+//Meu Controller
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioResource {
