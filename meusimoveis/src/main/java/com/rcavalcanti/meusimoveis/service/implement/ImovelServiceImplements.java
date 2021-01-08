@@ -1,6 +1,7 @@
 package com.rcavalcanti.meusimoveis.service.implement;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,13 +27,17 @@ public class ImovelServiceImplements implements ImovelService {
 	}
 
 	@Override
-	public Imovel atualizar(Imovel imovel) {		
-		return null;
+	@Transactional
+	public Imovel atualizar(Imovel imovel) {
+		Objects.requireNonNull(imovel.getId_imovel());
+		return repository.save(imovel);
 	}
 
 	@Override
-	public void deletar(Imovel imovel) {		
-		
+	@Transactional
+	public void deletar(Imovel imovel) {
+		Objects.requireNonNull(imovel.getId_imovel());
+		repository.delete(imovel);		
 	}
 
 	@Override
@@ -41,8 +46,9 @@ public class ImovelServiceImplements implements ImovelService {
 	}
 
 	@Override
-	public void atualizarStatus(Imovel imovelFiltro, StatusImovel statusImovel) {		
-		
+	public void atualizarStatus(Imovel imovel, StatusImovel statusImovel) {	
+		imovel.setStatusImovel(statusImovel);
+		atualizar(imovel);		
 	}
 
 }
