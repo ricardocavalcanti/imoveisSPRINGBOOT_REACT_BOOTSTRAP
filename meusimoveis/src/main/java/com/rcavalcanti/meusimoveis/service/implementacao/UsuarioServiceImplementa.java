@@ -1,6 +1,7 @@
 package com.rcavalcanti.meusimoveis.service.implementacao;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rcavalcanti.meusimoveis.exception.RegraNegocioException;
 import com.rcavalcanti.meusimoveis.model.entity.Usuario;
@@ -23,8 +24,10 @@ public class UsuarioServiceImplementa implements UsuarioService {
 	}
 
 	@Override
-	public Usuario salvarUsuario(Usuario usuario) {		
-		return null;
+	@Transactional
+	public Usuario salvarUsuario(Usuario usuario) {	
+		validarEmail(usuario.getEmail());
+		return repository.save(usuario);
 	}
 
 	//Vai na base de dados validar o email atraves do repository que foi injetado
